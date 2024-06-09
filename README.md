@@ -878,7 +878,9 @@ You have now successfully paired the BLE API with your Tesla to allow TeslaSolar
 
 Remeber: When you configure your car, be sure to check the "Use BLE" setting in your car configuration when using the BLE API.
 
-1. Go to `Base Configuration` (if you are on a mobile device, it is behind the menu button).
+
+
+8. Now go to `Base Configuration` (if you are on a mobile device, it is behind the menu button).
 
 ##### Setting Up Urls to get grid power
 
