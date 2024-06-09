@@ -29,7 +29,7 @@ TeslaSolarCharger is a service to set one or multiple Teslas' charging current u
 
 You can either install the software in a Docker container or download the binaries and deploy it on any server. Due to changes in Teslas API services you will also need a secondary device (for example another Raspberry Pi) close
 to the location of your Tesla to allow TeslaSolarCharger to communicate via Bluetooth to change charging settings frequently enough. Without this second device TeslaSolarCharger will stop working after a while due to Tesla rate
-limiting the API use. Change IP_ADDRESS_OF_SECOND_DEVICE to your IP address of the second device below in the docker-compose.yml.
+limiting the API use. Change IP_ADDRESS_OF_SECONDARY_DEVICE to your IP address of the second device below in the docker-compose.yml.
 
 An alternative is to place your main device next to your tesla, then you can run everything on one device.
 
@@ -78,6 +78,16 @@ services:
       - /var/run/dbus:/var/run/dbus
 ```
 
+#### First startup of the BLE API
+
+1. Move to your above created directory with your `docker-compose.yml`.
+1. Start all containers using the command `docker compose up -d`.
+
+### Generate key pair for BLE API
+
+Open a browser an navigate to the BLE API page on http://IP_ADDRESS_OF_SECONDARY_DEVICE:7210/swagger/index.html
+
+![Screenshot of browser showing BLE API page](/img/ble_api_overview.png)
 
 
 
@@ -209,7 +219,7 @@ services:
     environment:
 #      - Serilog__MinimumLevel__Default=Verbose #uncomment this line and recreate container with docker compose up -d for more detailed logs
       - TZ=Europe/Berlin ##You can change your Timezone here
-      - BleBaseUrl=http://IP_ADDRESS_OF_SECOND_DEVICE:7210/api
+      - BleBaseUrl=http://IP_ADDRESS_OF_SECONDARY_DEVICE:7210/api
     ports:
       - 7190:80
     volumes:
