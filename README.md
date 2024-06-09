@@ -868,7 +868,7 @@ It is recommended you sit in the car when executing the following step. You will
 
 Result:
 
-![Screenshot of browser showing BLE PAIR click](/img/ble_car_config_2.png)
+![Screenshot of browser showing BLE PAIR click](/img/ble_car_config_3.png)
 
 Tap the key card to your console (There will not be a message to pair on your Teslas display):
 
