@@ -78,56 +78,14 @@ services:
       - /var/run/dbus:/var/run/dbus
 ```
 
-#### First startup of the BLE API
+#### Startup of the BLE API
 
 1. Move to your above created directory with your `docker-compose.yml`.
 1. Start all containers using the command `docker compose up -d`.
 
-### Generate key pair for BLE API
-
-Open a browser an navigate to the BLE API page on http://IP_ADDRESS_OF_SECONDARY_DEVICE:7210/swagger/index.html
-
-![Screenshot of browser showing BLE API page](/img/ble_api_overview.png)
-
-Under "Pairing" click the expand button for "/api/Pairing/GenerateKeyPair" and klick on "Try it out":
-
-![Screenshot of browser showing BLE API GenerateKeyPair expansion](/img/ble_generate_keypair_1.png)
-
-Click on "Execute":
-
-![Screenshot of browser showing BLE API GenerateKeyPair expansion with "Try it out" clicked](/img/ble_generate_keypair_2.png)
-
-Result:
-
-![Screenshot of browser showing BLE API GenerateKeyPair expansion with "Execute" clicked](/img/ble_generate_keypair_3.png)
-
-### Pair your car with the BLE API
-
-Now that we have generated a key pair for the BLE API, we will allow access from the BLE API to your Tesla. This will allow TeslaSolarCharger to send commands (like setting the amps to charge) to your Tesla.
-
-It is recommended you sit in the car when executing the following steps. You will need your Tesla key card to allow the BLE API access.
-
-On the same API page as above:
-
-Under "Pairing" click the expand button for "/api/Pairing/PairCar" and click on "Try it out"
-
-![Screenshot of browser showing BLE API PairCar expansion](/img/ble_pair_car_1.png)
-
-Enter the VIN of your Tesla in the vin field and click "Execute":
-
-![Screenshot of browser showing BLE API PairCar expansion with "Execute" to be clicked](/img/ble_pair_car_2.png)
-
-Result:
-
-![Screenshot of browser showing BLE API PairCar expansion with VIN entered and "Execute" clicked](/img/ble_pair_car_3.png)
-
-Tap the key card to your console (There will not be a message to pair on your Teslas display):
-
-![Picture showing the confirmation dialog in your Tesla](/img/ble_pair_car_4.jpeg)
-
-You have now successfully paired the BLE API with your Tesla to allow TeslaSolarCharger to communicate via the BLE API with your Tesla. In the documentation below, replace IP_ADDRESS_OF_SECONDARY_DEVICE with the ip address of your BLE API device.
-
 ### Docker compose - on your main device
+
+*IMPORTANT: Remember to replace the IP_ADDRESS_OF_SECONDARY_DEVICE with the ip address of your BLE API device.*
 
 The easiest way to use TeslaSolarCharger is with Docker.
 
@@ -894,6 +852,7 @@ volumes:
 1. Open your browser, go to `http://your-ip-address:4000` and paste your token and refresh token into the form.
 1. Go to `Geo-Fences` and add a Geo-Fence called `Home` at the location you want TeslaSolarCharger to be active.
 1. Open `http://your-ip-address:7190`
+1. Configure BLE API usage (see blow)
 1. Go to `Base Configuration` (if you are on a mobile device, it is behind the menu button).
 
 ##### Setting Up Urls to get grid power
@@ -1083,7 +1042,31 @@ In this section you learn how to create the Telegram Bot Key and where you get t
 
 ## How to use
 
-After setting everything up, you can use the software via `http://your-ip-address:7190`. Remeber: When you configure your car, be sure to check the "Use BLE" setting in your car configuration when using the BLE API.
+After setting everything up, you can use the software via `http://your-ip-address:7190`.
+
+# Configure BLE API usage
+
+Go to "Car Settings" and tick "Use Ble" and click on "SAVE":
+
+![Screenshot of browser showing BLE API configuration for your car](/img/ble_car_config_1.png)
+
+# Pair your Tesla with TeslaSolarCharger BLE API
+
+It is recommended you sit in the car when executing the following step. You will need your Tesla key card to allow the BLE API access. On the "Car Settings" page click "BLE PAIR":
+
+![Screenshot of browser showing BLE PAIR click](/img/ble_car_config_2.png)
+
+Result:
+
+![Screenshot of browser showing BLE PAIR click](/img/ble_car_config_2.png)
+
+Tap the key card to your console (There will not be a message to pair on your Teslas display):
+
+![Picture showing the confirmation dialog in your Tesla](/img/ble_pair_car_4.jpeg)
+
+You have now successfully paired the BLE API with your Tesla to allow TeslaSolarCharger to communicate via the BLE API with your Tesla.
+
+Remeber: When you configure your car, be sure to check the "Use BLE" setting in your car configuration when using the BLE API.
 
 ### Charge Modes
 
