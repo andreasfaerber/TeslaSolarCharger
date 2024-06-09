@@ -57,7 +57,7 @@ If you are using a Windows host, install the Software from [here](https://docs.d
 
 ### Setting up TeslaSolarCharger BLE API
 
-The TeslaSolarCharger will frequently communicate with your Tesla through the BLE API. To set up the BLE API you must create a `docker-compose.yml` (name is important!) file in a new directory. Note: During the setup, some additional data folders to persist data will be created in that folder, so it is recommended to use a new directory for your `docker-compose.yml`.
+The TeslaSolarCharger will frequently communicate with your Tesla through the BLE API. To set up the BLE API you must create a `docker-compose.yml` (name is important!) file in a new directory. Note: During the setup, some additional data folders to persist data will be created in that folder, so it is recommended to use a new directory for your `docker-compose.yml`. Replace IP_ADDRESS_OF_SECONDARY_DEVICE with the IP address of your BLE API device. This needs to be done when pairing and also when creating the relevant docker-compose.yml files.
 
 #### docker-compose.yml content
 
@@ -89,15 +89,15 @@ Open a browser an navigate to the BLE API page on http://IP_ADDRESS_OF_SECONDARY
 
 ![Screenshot of browser showing BLE API page](/img/ble_api_overview.png)
 
-Under "Pairing" click the expand button for "/api/Pairing/GenerateKeyPair":
+Under "Pairing" click the expand button for "/api/Pairing/GenerateKeyPair" and klick on "Try it out":
 
 ![Screenshot of browser showing BLE API GenerateKeyPair expansion](/img/ble_generate_keypair_1.png)
 
-Click on "Try it out":
+Click on "Execute":
 
 ![Screenshot of browser showing BLE API GenerateKeyPair expansion with "Try it out" clicked](/img/ble_generate_keypair_2.png)
 
-Click on "Execute":
+Result:
 
 ![Screenshot of browser showing BLE API GenerateKeyPair expansion with "Execute" clicked](/img/ble_generate_keypair_3.png)
 
@@ -109,15 +109,15 @@ It is recommended you sit in the car when executing the following steps. You wil
 
 On the same API page as above:
 
-Under "Pairing" click the expand button for "/api/Pairing/PairCar":
+Under "Pairing" click the expand button for "/api/Pairing/PairCar" and click on "Try it out"
 
 ![Screenshot of browser showing BLE API PairCar expansion](/img/ble_pair_car_1.png)
 
-Click on "Try it out":
-
-![Screenshot of browser showing BLE API PairCar expansion with "Try it out" clicked](/img/ble_pair_car_2.png)
-
 Enter the VIN of your Tesla in the vin field and click "Execute":
+
+![Screenshot of browser showing BLE API PairCar expansion with "Execute" to be clicked](/img/ble_pair_car_2.png)
+
+Result:
 
 ![Screenshot of browser showing BLE API PairCar expansion with VIN entered and "Execute" clicked](/img/ble_pair_car_3.png)
 
@@ -125,10 +125,7 @@ Tap the key card to your console (There will not be a message to pair on your Te
 
 ![Picture showing the confirmation dialog in your Tesla](/img/ble_pair_car_4.jpeg)
 
-
-
-After you have successfully created 
-
+You have now successfully paired the BLE API with your Tesla to allow TeslaSolarCharger to communicate via the BLE API with your Tesla. In the documentation below, replace IP_ADDRESS_OF_SECONDARY_DEVICE with the ip address of your BLE API device.
 
 ### Docker compose - on your main device
 
@@ -394,6 +391,7 @@ services:
     environment:
 #      - Serilog__MinimumLevel__Default=Verbose #uncomment this line and recreate container with docker compose up -d for more detailed logs
       - TZ=Europe/Berlin ##You can change your Timezone here
+      - BleBaseUrl=http://IP_ADDRESS_OF_SECONDARY_DEVICE:7210/api
     ports:
       - 7190:80
     volumes:
@@ -548,6 +546,7 @@ services:
     environment:
 #      - Serilog__MinimumLevel__Default=Verbose #uncomment this line and recreate container with docker compose up -d for more detailed logs
       - TZ=Europe/Berlin ##You can change your Timezone here
+      - BleBaseUrl=http://IP_ADDRESS_OF_SECONDARY_DEVICE:7210/api
     ports:
       - 7190:80
     volumes:
@@ -702,6 +701,7 @@ services:
     environment:
 #      - Serilog__MinimumLevel__Default=Verbose #uncomment this line and recreate container with docker compose up -d for more detailed logs
       - TZ=Europe/Berlin ##You can change your Timezone here
+      - BleBaseUrl=http://IP_ADDRESS_OF_SECONDARY_DEVICE:7210/api
     ports:
       - 7190:80
     volumes:
@@ -855,6 +855,7 @@ services:
     environment:
 #      - Serilog__MinimumLevel__Default=Verbose #uncomment this line and recreate container with docker compose up -d for more detailed logs
       - TZ=Europe/Berlin ##You can change your Timezone here
+      - BleBaseUrl=http://IP_ADDRESS_OF_SECONDARY_DEVICE:7210/api
     ports:
       - 7190:80
     volumes:
@@ -1082,7 +1083,7 @@ In this section you learn how to create the Telegram Bot Key and where you get t
 
 ## How to use
 
-After setting everything up, you can use the software via `http://your-ip-address:7190`.
+After setting everything up, you can use the software via `http://your-ip-address:7190`. Remeber: When you configure your car, be sure to check the "Use BLE" setting in your car configuration when using the BLE API.
 
 ### Charge Modes
 
