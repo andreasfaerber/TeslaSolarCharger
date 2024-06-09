@@ -89,7 +89,24 @@ Open a browser an navigate to the BLE API page on http://IP_ADDRESS_OF_SECONDARY
 
 ![Screenshot of browser showing BLE API page](/img/ble_api_overview.png)
 
+Under "Pairing" click the expand buttong for "/api/Pairing/GenerateKeyPair":
 
+![Screenshot of browser showing BLE API GenerateKeyPair expansion](/img/ble_generate_keypair_1.png)
+
+Click on "Try it out":
+
+![Screenshot of browser showing BLE API GenerateKeyPair expansion with "Try it out" clicked](/img/ble_generate_keypair_2.png)
+
+Click on "Execute":
+
+![Screenshot of browser showing BLE API GenerateKeyPair expansion with "Try it out" clicked](/img/ble_generate_keypair_3.png)
+
+
+
+
+### Pair your car with the BLE API
+
+After you have successfully created 
 
 
 ### Docker compose - on your main device
