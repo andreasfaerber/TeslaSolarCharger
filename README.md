@@ -876,9 +876,7 @@ Tap the key card to your console (There will not be a message to pair on your Te
 
 You have now successfully paired the BLE API with your Tesla to allow TeslaSolarCharger to communicate via the BLE API with your Tesla.
 
-Remeber: When you configure your car, be sure to check the "Use BLE" setting in your car configuration when using the BLE API.
-
-
+Remember: Rplace IP_ADDRESS_OF_SECONDARY_DEVICE in the docker-compose.yml with your ip address of the secondary device (which you installed first).
 
 8. Now go to `Base Configuration` (if you are on a mobile device, it is behind the menu button).
 
