@@ -89,7 +89,7 @@ Open a browser an navigate to the BLE API page on http://IP_ADDRESS_OF_SECONDARY
 
 ![Screenshot of browser showing BLE API page](/img/ble_api_overview.png)
 
-Under "Pairing" click the expand buttong for "/api/Pairing/GenerateKeyPair":
+Under "Pairing" click the expand button for "/api/Pairing/GenerateKeyPair":
 
 ![Screenshot of browser showing BLE API GenerateKeyPair expansion](/img/ble_generate_keypair_1.png)
 
@@ -99,12 +99,33 @@ Click on "Try it out":
 
 Click on "Execute":
 
-![Screenshot of browser showing BLE API GenerateKeyPair expansion with "Try it out" clicked](/img/ble_generate_keypair_3.png)
-
-
-
+![Screenshot of browser showing BLE API GenerateKeyPair expansion with "Execute" clicked](/img/ble_generate_keypair_3.png)
 
 ### Pair your car with the BLE API
+
+Now that we have generated a key pair for the BLE API, we will allow access from the BLE API to your Tesla. This will allow TeslaSolarCharger to send commands (like setting the amps to charge) to your Tesla.
+
+It is recommended you sit in the car when executing the following steps. You will need your Tesla key card to allow the BLE API access.
+
+On the same API page as above:
+
+Under "Pairing" click the expand button for "/api/Pairing/PairCar":
+
+![Screenshot of browser showing BLE API PairCar expansion](/img/ble_pair_car_1.png)
+
+Click on "Try it out":
+
+![Screenshot of browser showing BLE API PairCar expansion with "Try it out" clicked](/img/ble_pair_car_2.png)
+
+Enter the VIN of your Tesla in the vin field and click "Execute":
+
+![Screenshot of browser showing BLE API PairCar expansion with VIN entered and "Execute" clicked](/img/ble_pair_car_3.png)
+
+Tap the key card to your console (There will not be a message to pair on your Teslas display):
+
+![Picture showing the confirmation dialog in your Tesla](/img/ble_pair_car_4.jpeg)
+
+
 
 After you have successfully created 
 
