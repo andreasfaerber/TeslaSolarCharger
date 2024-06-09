@@ -27,9 +27,62 @@ TeslaSolarCharger is a service to set one or multiple Teslas' charging current u
 
 ## How to install
 
-You can either install the software in a Docker container or download the binaries and deploy it on any server.
+You can either install the software in a Docker container or download the binaries and deploy it on any server. Due to changes in Teslas API services you will also need a secondary device (for example another Raspberry Pi) close
+to the location of your Tesla to allow TeslaSolarCharger to communicate via Bluetooth to change charging settings frequently enough. Without this second device TeslaSolarCharger will stop working after a while due to Tesla rate
+limiting the API use. Change IP_ADDRESS_OF_SECOND_DEVICE to your IP address of the second device below in the docker-compose.yml.
 
-### Docker compose
+An alternative is to place your main device next to your tesla, then you can run everything on one device.
+
+### Docker compose - on your secondary device
+
+We're installing on your secondary device first so that everything is ready when installing TeslaSolarCharger and you already know the ip address of your secondary device.
+
+Depending on your system, you have to install Docker first. To do this on a RaspberryPi (should be the same on standard Linux systems), you need to execute the following commands in your Terminal window:
+1. Install Docker
+    ```
+    curl -sSL https://get.docker.com | sh
+    ```
+1. Add permissions to the `pi` user. If you have another username, update the command accordingly
+    ```
+    sudo usermod -aG docker pi
+    ```
+1. Reboot your Raspberry Pi
+1. Test the Docker installation
+    ```
+    docker run hello-world
+    ```
+If any issues occur, try to identify them using [this more detailed instruction](https://www.simplilearn.com/tutorials/docker-tutorial/raspberry-pi-docker).
+
+If you are using a Windows host, install the Software from [here](https://docs.docker.com/desktop/install/windows-install/). Windows 11 is highly recommended. Select Linux Containers in the installation process.
+
+### Setting up TeslaSolarCharger BLE API
+
+The TeslaSolarCharger will frequently communicate with your Tesla through the BLE API. To set up the BLE API you must create a `docker-compose.yml` (name is important!) file in a new directory. Note: During the setup, some additional data folders to persist data will be created in that folder, so it is recommended to use a new directory for your `docker-compose.yml`.
+
+#### docker-compose.yml content
+
+Below you can see the content for your `docker-compose.yml` for the BLE API.
+
+```yaml
+services:
+  bleapi:
+    image: ghcr.io/pkuehnel/teslasolarchargerbleapi:latest
+    container_name: TeslaSolarChargerBleApi
+    privileged: true
+    restart: unless-stopped
+    network_mode: host
+    environment:
+      - ASPNETCORE_URLS=http://+:7210
+    volumes:
+      - ./externalFiles:/externalFiles
+      - /var/run/dbus:/var/run/dbus
+```
+
+
+
+
+
+### Docker compose - on your main device
 
 The easiest way to use TeslaSolarCharger is with Docker.
 
@@ -156,6 +209,7 @@ services:
     environment:
 #      - Serilog__MinimumLevel__Default=Verbose #uncomment this line and recreate container with docker compose up -d for more detailed logs
       - TZ=Europe/Berlin ##You can change your Timezone here
+      - BleBaseUrl=http://IP_ADDRESS_OF_SECOND_DEVICE:7210/api
     ports:
       - 7190:80
     volumes:
